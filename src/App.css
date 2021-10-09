@@ -8,6 +8,10 @@
   justify-self: end;
 }
 
+.form {
+  width: 350px;
+}
+
 .label {
   display: block;
   margin-bottom: 5px;
@@ -54,7 +58,7 @@
   list-style-type: none;
 }
 
-.list-item {
+.listItem {
   display: grid;
   grid-template-columns: 45% 35% 20%;
   padding: 8px 10px 8px 20px;

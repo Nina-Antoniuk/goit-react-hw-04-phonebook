@@ -26,15 +26,28 @@ class App extends Component {
   };
 
   submit = obj => {
-    this.setState(prevState => ({
-      contacts: [
-        {
-          id: uuidv1(),
-          ...obj,
-        },
-        ...prevState.contacts,
-      ],
-    }));
+    const existContact = this.state.contacts.find(contact => {
+      return contact.name === obj.name;
+    });
+
+    if (existContact) {
+      return alert(`${obj.name} is already in contacts`);
+    }
+
+    this.setState(
+      prevState => ({
+        contacts: [
+          {
+            id: uuidv1(),
+            ...obj,
+          },
+          ...prevState.contacts,
+        ],
+      }),
+      () => {
+        console.log(this.state.contacts); // all contacts has id
+      },
+    );
   };
 
   filtredNames = () => {
