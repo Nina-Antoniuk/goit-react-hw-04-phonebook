@@ -1,20 +1,20 @@
-function Filter(props) {
+function Filter({ id, value, onChange }) {
   return (
     <>
-      <label className="label" htmlFor={props.id}>
+      <label className="label" htmlFor={id}>
         Find contacts by name
       </label>
 
       <input
-        id={props.id}
+        id={id}
         className="input"
         name="filter"
         type="text"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Введите имя которое ищите"
         autoComplete="off"
-        value={props.value}
-        onChange={props.onChange}
+        value={value}
+        onChange={onChange}
       />
     </>
   );

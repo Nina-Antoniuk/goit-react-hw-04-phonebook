@@ -26,58 +26,67 @@ class App extends Component {
   };
 
   submit = obj => {
-    const existContact = this.state.contacts.find(contact => {
+    const existingContact = this.state.contacts.find(contact => {
       return contact.name === obj.name;
     });
 
-    if (existContact) {
+    if (existingContact) {
       return alert(`${obj.name} is already in contacts`);
     }
 
-    this.setState(
-      prevState => ({
-        contacts: [
-          {
-            id: uuidv1(),
-            ...obj,
-          },
-          ...prevState.contacts,
-        ],
-      }),
-      () => {
-        console.log(this.state.contacts); // all contacts has id
-      },
-    );
+    this.setState(prevState => ({
+      contacts: [
+        {
+          id: uuidv1(),
+          ...obj,
+        },
+        ...prevState.contacts,
+      ],
+    }));
   };
 
-  filtredNames = () => {
-    return this.state.contacts.filter(contact => {
-      if (
-        contact.name
-          .toLowerCase()
-          .includes(this.state.filter.toLocaleLowerCase())
-      ) {
+  contactsFiltering = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact => {
+      if (contact.name.toLowerCase().includes(filter.toLocaleLowerCase())) {
         return contact;
       }
     });
   };
 
+  deleteContact = e => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => {
+        return contact.id !== e.target.parentNode.id;
+      }),
+    }));
+  };
+
   render() {
+    const {
+      inputChange,
+      submit,
+      filterFieldId,
+      state,
+      contactsFiltering,
+      deleteContact,
+    } = this;
+
     return (
       <div className="App">
         <div className="wrapper">
           <h2>Phonebook</h2>
-          <Form onChange={this.inputChange} onSubmit={this.submit} />
+          <Form onSubmit={submit} />
         </div>
 
         <div className="wrapper">
           <h2>Contacts</h2>
           <Filter
-            id={this.filterFieldId}
-            value={this.state.filter}
-            onChange={this.inputChange}
+            id={filterFieldId}
+            value={state.filter}
+            onChange={inputChange}
           />
-          <Contacts names={this.filtredNames} />
+          <Contacts names={contactsFiltering} onClick={deleteContact} />
         </div>
       </div>
     );

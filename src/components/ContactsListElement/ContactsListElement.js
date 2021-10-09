@@ -1,9 +1,8 @@
-function ContactsListElement(props) {
+function ContactsListElement({ id, name, number, onClick }) {
   return (
-    <li className="listItem" key={props.id}>
-      {/* {console.log(props.id)} // uniqe key */}
-      <span className="name">{props.name}:</span> {props.number}
-      <button className="deleteBtn" type="button">
+    <li className="listItem" id={id} key={id}>
+      <span className="name">{name}:</span> {number}
+      <button className="deleteBtn" type="button" onClick={onClick}>
         Delete
       </button>
     </li>

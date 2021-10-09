@@ -19,8 +19,10 @@ class Form extends Component {
 
   submit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
-    this.reset();
+    const { props, state, reset } = this;
+
+    props.onSubmit(state);
+    reset();
   };
 
   reset = () => {
@@ -31,13 +33,14 @@ class Form extends Component {
   };
 
   render() {
+    const { submit, nameId, state, inputChange, numberId } = this;
     return (
-      <form className="form" onSubmit={this.submit}>
-        <label className="label" htmlFor={this.nameId}>
+      <form className="form" onSubmit={submit}>
+        <label className="label" htmlFor={nameId}>
           Name
         </label>
         <input
-          id={this.nameId}
+          id={nameId}
           className="input"
           type="text"
           name="name"
@@ -46,15 +49,15 @@ class Form extends Component {
             Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
           autoComplete="off"
-          value={this.state.name}
-          onChange={this.inputChange}
+          value={state.name}
+          onChange={inputChange}
         />
 
-        <label className="label" htmlFor={this.numberId}>
+        <label className="label" htmlFor={numberId}>
           Number
         </label>
         <input
-          id={this.numberId}
+          id={numberId}
           className="input"
           type="tel"
           name="number"
@@ -63,8 +66,8 @@ class Form extends Component {
             круглые скобки и может начинаться с +"
           required
           autoComplete="off"
-          value={this.state.number}
-          onChange={this.inputChange}
+          value={state.number}
+          onChange={inputChange}
         />
 
         <button className="button" type="submit">
