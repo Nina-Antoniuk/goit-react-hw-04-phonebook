@@ -9,14 +9,23 @@ class App extends Component {
   filterFieldId = uuidv1();
 
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    if (localStorage.getItem('contacts')) {
+      this.setState({
+        contacts: [...JSON.parse(localStorage.getItem('contacts'))],
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts.length !== prevState.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   inputChange = e => {
     const { name, value } = e.target;
@@ -47,8 +56,9 @@ class App extends Component {
 
   contactsFiltering = () => {
     const { contacts, filter } = this.state;
+    const filterValue = filter.toLocaleLowerCase();
     return contacts.filter(contact => {
-      if (contact.name.toLowerCase().includes(filter.toLocaleLowerCase())) {
+      if (contact.name.toLowerCase().includes(filterValue)) {
         return contact;
       }
     });
