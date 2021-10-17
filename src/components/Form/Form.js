@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { v1 as uuidv1 } from 'uuid';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   nameId = uuidv1();
@@ -77,5 +78,9 @@ class Form extends Component {
     );
   }
 }
+
+Form.propTypes = {
+  onSubmit: PropTypes.func,
+};
 
 export default Form;

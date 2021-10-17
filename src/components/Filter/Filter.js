@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Filter({ id, value, onChange }) {
   return (
     <>
@@ -19,5 +21,11 @@ function Filter({ id, value, onChange }) {
     </>
   );
 }
+
+Filter.propTypes = {
+  id: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 export default Filter;
