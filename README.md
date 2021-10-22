@@ -1,9 +1,9 @@
-# Домашне завдання 3.1
+# Домашне завдання 4.2
 
-## Тема: Життевий цикл компонентів. REST API
+## Тема: Хуки
 
 Завдання виконано відповідно до ТЗ -
-https://github.com/goitacademy/react-homework/tree/master/homework-03
+https://github.com/goitacademy/react-homework/blob/master/hooks/README.md
 
 ## Технології:
 
